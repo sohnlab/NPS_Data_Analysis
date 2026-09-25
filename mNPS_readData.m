@@ -268,14 +268,16 @@ function [OUT_array, empty, auto_thresh_value, column_names, column_units, rec_c
         % apply the tight stack and drop the duplicated x tick labels.
         % Visual order, top to bottom: y_diff, y_LP, y_rect, recovery fit.
         % Only the bottom signal panel keeps its tick labels and xlabel.
-        L = 0.10; Wd = 0.86; h_sig = 0.20; h_fit = 0.15; gap = 0.042; b0 = 0.065;
+        % x0 is the panels' left edge. Not L: that is the channel length
+        % (Section 0), which Section 9b needs for the diameter.
+        x0 = 0.10; Wd = 0.86; h_sig = 0.20; h_fit = 0.15; gap = 0.042; b0 = 0.065;
         b3 = b0 + h_fit + gap + 0.02;
         b2 = b3 + h_sig + gap;
         b1 = b2 + h_sig + gap;
-        set(ax1,'Position',[L b1 Wd h_sig], 'FontSize',9, 'XTickLabel',[]); % y_diff
-        set(ax3,'Position',[L b2 Wd h_sig], 'FontSize',9, 'XTickLabel',[]); % y_LP
-        set(ax2,'Position',[L b3 Wd h_sig], 'FontSize',9);                  % y_rect
-        set(ax4,'Position',[L b0 Wd h_fit], 'FontSize',9);
+        set(ax1,'Position',[x0 b1 Wd h_sig], 'FontSize',9, 'XTickLabel',[]); % y_diff
+        set(ax3,'Position',[x0 b2 Wd h_sig], 'FontSize',9, 'XTickLabel',[]); % y_LP
+        set(ax2,'Position',[x0 b3 Wd h_sig], 'FontSize',9);                  % y_rect
+        set(ax4,'Position',[x0 b0 Wd h_fit], 'FontSize',9);
 
         linkaxes([ax1,ax2,ax3], 'x');
 
